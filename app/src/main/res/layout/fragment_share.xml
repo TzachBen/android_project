@@ -1,0 +1,22 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tzach.onclicklistner.ShareFragment">
+
+    <Button
+        android:id="@+id/createSharing"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end"
+        android:background="@android:color/background_light"
+        android:drawableEnd="@android:drawable/ic_menu_add"
+        android:text="@string/create_new_sharing"
+        android:textColor="@android:color/holo_blue_dark"
+       />
+
+
+
+</FrameLayout>

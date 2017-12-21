@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <array name="images">
+        <item>@drawable/pic1</item>
+        <item>@drawable/pic2</item>
+        <item>@drawable/pic3</item>
+        <item>@drawable/pic4</item>
+        <item>@drawable/pic5</item>
+        <item>@drawable/pic6</item>
+    </array>
+
+    <string-array name="names">
+        <item>Lion</item>
+        <item>Tiger</item>
+        <item>Elephant</item>
+        <item>Fox</item>
+        <item>Squarl</item>
+        <item>Cow</item>
+    </string-array>
+</resources>

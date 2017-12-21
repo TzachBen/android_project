@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OnClickListner</string>
+    <string name="title_home">Photos</string>
+    <string name="title_dashboard">Albums</string>
+    <string name="title_notifications">Sharing</string>
+    <string name="create_album"> create album </string>
+    <string name="create_new_sharing">create new sharing</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
