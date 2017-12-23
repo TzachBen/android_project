@@ -33,11 +33,13 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/delete_image_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_delete"
                 />
             <ImageButton
+                android:id="@+id/share_image_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_share"
