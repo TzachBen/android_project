@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.tzach.onclicklistner.core.MyInfoManager;
+
 //import com.example.tzach.onclicklistner.core.MyInfoManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-//    protected void onResume() {
-//        super.onResume();
-//        MyInfoManager.getInstance().openDatabase(this);
-//    }
+    protected void onResume() {
+        super.onResume();
+        MyInfoManager.getInstance().openDatabase(this);
+    }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        MyInfoManager.getInstance().closeDatabase();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyInfoManager.getInstance().closeDatabase();
+    }
 
 }
