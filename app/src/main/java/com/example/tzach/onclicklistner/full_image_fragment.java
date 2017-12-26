@@ -61,11 +61,7 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
 
             case R.id.share_image_btn:
                     startShare();
-//                Uri uriToImage= null;
-//                Intent myIntent = new Intent(Intent.ACTION_SEND);
-//                myIntent.setType("image/jpeg");
-//                myIntent.putExtra(Intent.EXTRA_STREAM,uriToImage);
-//                startActivity(Intent.createChooser(myIntent,"share with"));
+
                 break;
 
             case R.id.delete_image_btn:

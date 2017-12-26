@@ -60,7 +60,7 @@ public class MyInfoManager {
 
     public void updatePost(Albums albums) {
         if(albumDataBase !=null){
-            albumDataBase.updateaLBUM(albums);
+            albumDataBase.updateALBUM(albums);
         }
     }
 }

@@ -18,10 +18,10 @@ import java.util.List;
 
 public class AlbumDataBase extends SQLiteOpenHelper {
 
-    private  static final String DATABASE_NAME = "albuns_data_base";
+    private  static final String DATABASE_NAME = "albums_data_base";
     private static final int VERSION = 1;
     private SQLiteDatabase db;
-    private static Date date;
+
 
     private  static final String ALBUM_TABLE = "albums";
     private  static final String ALBUM_ID = "id";
@@ -57,7 +57,7 @@ public class AlbumDataBase extends SQLiteOpenHelper {
         }
     }
 
-    public boolean updateaLBUM(Albums albums) {
+    public boolean updateALBUM(Albums albums) {
 
         long result = -1;
         ContentValues values = new ContentValues();
