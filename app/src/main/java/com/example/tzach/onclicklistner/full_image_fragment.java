@@ -2,6 +2,7 @@ package com.example.tzach.onclicklistner;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Environment;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,9 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
     private ImageView imageView;
     private AlertDialog dialog;
     private View view;
+    private  Context context;
+    private RecyclerView rv;
+
 
 
 
@@ -72,8 +77,6 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-
-
                     }
                 });
                 dialog.setButton2("no", new DialogInterface.OnClickListener() {
@@ -97,7 +100,7 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
     public void startShare(){
         Bitmap bitmap = viewToBitmap(imageView,imageView.getWidth(),imageView.getHeight());
         Intent shareIntent = new Intent((Intent.ACTION_SEND));
-        shareIntent.setType("image/jpeg");
+        shareIntent.setType("image/*");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
         File file = new File(Environment.getExternalStorageDirectory()+File.separator+"ImageDeme.jpg");
@@ -108,7 +111,7 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
         } catch (IOException e) {
             e.printStackTrace();
         }
-        shareIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file:///sdcard/Imagedeme.jpg"));
+        shareIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse(Environment.getExternalStorageDirectory().getPath()));
         startActivity(Intent.createChooser(shareIntent,"share with"));
     }
 

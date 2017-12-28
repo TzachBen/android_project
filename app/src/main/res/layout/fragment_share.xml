@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/share_frame"
     tools:context="com.example.tzach.onclicklistner.ShareFragment">
+
 
     <Button
         android:id="@+id/createSharing"
@@ -16,6 +18,7 @@
         android:text="@string/create_new_sharing"
         android:textColor="@android:color/holo_blue_dark"
        />
+
 
 
 
