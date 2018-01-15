@@ -63,5 +63,13 @@ public class MyInfoManager {
             albumDataBase.updateALBUM(albums);
         }
     }
+
+    public boolean addNewImage(Images img){
+        boolean res = false;
+        if(albumDataBase !=null){
+            res = albumDataBase.addNewImage(img);
+        }
+        return res;
+    }
 }
 

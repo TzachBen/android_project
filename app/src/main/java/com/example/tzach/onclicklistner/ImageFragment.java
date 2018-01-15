@@ -5,13 +5,21 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Environment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tzach.onclicklistner.core.Images;
+import com.example.tzach.onclicklistner.core.MyInfoManager;
+
+import java.io.File;
 
 
 /**
@@ -39,6 +47,28 @@ public class ImageFragment extends Fragment {
             mImageResIds[i] = typedArray.getResourceId(i, 0);
         }
         typedArray.recycle();
+    }
+
+
+    private void updatePhotos(){
+
+        File f= new  File(Environment.getExternalStorageDirectory(),Environment.DIRECTORY_DCIM);
+        if(f.exists()){
+            File fList[] = f.listFiles();
+            if(fList!=null){
+                for(File picFile:fList){
+
+                    Images imgInfo = new Images();
+                    imgInfo.setImgName(picFile.getName());
+                    imgInfo.setDate(String.valueOf(picFile.lastModified()));
+                   // Bitmap bm=BitmapFactory.decodeFile(picFile.getAbsolutePath());
+                    //imgInfo.setImgPath(picFile.getPath());
+
+                    MyInfoManager.getInstance().addNewImage(imgInfo);
+                }
+            }
+
+        }
     }
 
     @Override
