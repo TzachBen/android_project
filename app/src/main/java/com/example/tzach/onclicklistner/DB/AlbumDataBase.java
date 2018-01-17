@@ -33,7 +33,7 @@ public class AlbumDataBase extends SQLiteOpenHelper {
     private  static final String IMAGES_TABLE = "images";
     private  static final String IMAGES_NAME = "imagename";
     private  static final String RELATED_ALBUM_ID = "albumid";
-    private  static final String IMG_DATE ="date" ;
+    private  static final String IMG_DATE ="mdate" ;
     //private  static final String IMG_PATH = "imgpath";
 
 

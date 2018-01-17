@@ -18,6 +18,16 @@ public class MyInfoManager {
 
     private Albums editAlbum;
 
+    private Images selectedImage;
+
+    public void setSelectedImage(Images selectedImage) {
+        this.selectedImage = selectedImage;
+    }
+
+    public Images getSelectedImage() {
+        return selectedImage;
+    }
+
     public static MyInfoManager getInstance(){
 
         if(instance == null){
@@ -48,6 +58,12 @@ public class MyInfoManager {
     public List<Albums> getAllPosts(){
         return albumDataBase.getAllAlbums();
     }
+
+
+    public List<Images> getAllImages(){
+        return albumDataBase.getAllImages();
+    }
+
 
 
     public void setEditAlbum(Albums editAlbum) {

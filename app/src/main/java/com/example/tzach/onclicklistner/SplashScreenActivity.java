@@ -100,7 +100,7 @@ public class SplashScreenActivity extends AppCompatActivity implements  Activity
 //                            bitmap = Bitmap.createScaledBitmap(bitmap, 300, 500, true);
                             Date date = new Date(image.lastModified());
                             Images pictureInfo = new Images();
-                            pictureInfo.setImgPath(image.getAbsolutePath());
+                            pictureInfo.setImgName(image.getName());
                             MyInfoManager.getInstance().addNewImage(pictureInfo);
                         }
 

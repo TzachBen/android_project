@@ -2,11 +2,13 @@ package com.example.tzach.onclicklistner.core;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,7 +81,18 @@ public class Images {
 
 
     public Bitmap getImg() {
-        return img;
+        Bitmap bitmap = null;
+        File dcimDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File photosDir = new File(dcimDirectory,"Camera");
+        File img = new File(photosDir, getImgName());
+        if(img.exists()) {
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+
+            Bitmap mbitmap = BitmapFactory.decodeFile(img.getAbsolutePath(), bmOptions);
+
+            bitmap = Bitmap.createScaledBitmap(mbitmap, 300, 500, true);
+        }
+        return bitmap;
     }
 
     public void setImg(Bitmap img) {

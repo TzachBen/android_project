@@ -21,6 +21,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzach.onclicklistner.core.Images;
+import com.example.tzach.onclicklistner.core.MyInfoManager;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,8 +55,12 @@ public class full_image_fragment extends Fragment implements View.OnClickListene
         shareBtn= view.findViewById(R.id.share_image_btn);
         deleteBtn = view.findViewById(R.id.delete_image_btn);
         imageView = (ImageView) view.findViewById(R.id.imageView);
-        Bundle args = getArguments();
-        imageView.setImageResource(args.getInt(ARGUMENT_IMAGE_RES_ID));
+        //Bundle args = getArguments();
+        //imageView.setImageResource(args.getInt(ARGUMENT_IMAGE_RES_ID));
+       Images img= MyInfoManager.getInstance().getSelectedImage();
+        if(img!=null){
+            imageView.setImageBitmap(img.getImg());
+        }
         shareBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
 

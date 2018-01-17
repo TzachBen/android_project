@@ -12,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzach.onclicklistner.core.Images;
+import com.example.tzach.onclicklistner.core.MyInfoManager;
+
+import java.util.List;
+
 /**
  * Created by Tzach on 12/14/2017.
  */
@@ -21,11 +26,11 @@ public class dataAdapter extends RecyclerView.Adapter<ViewHolder> {
     private LayoutInflater mLayoutInflater;
 
 
-    protected int[] pictures;
+    protected  List<Images> pictures;
     protected Context context;
 
 
-    public dataAdapter(Context context, int[] pictures) {
+    public dataAdapter(Context context, List<Images> pictures) {
         mLayoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.pictures=pictures;
@@ -43,7 +48,7 @@ public class dataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        final int imageResId = pictures[position];
+        final Images imageResId= pictures.get(position);
         viewHolder.setData(imageResId);
 
         viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +57,11 @@ public class dataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
                 full_image_fragment detailsFragment = new full_image_fragment();
                 // send data to fragment
-                Bundle args = new Bundle();
-                args.putInt(full_image_fragment.ARGUMENT_IMAGE_RES_ID, imageResId);
-                detailsFragment.setArguments(args);
+                //Bundle args = new Bundle();
+                //args.putInt(full_image_fragment.ARGUMENT_IMAGE_RES_ID, imageResId);
+                //detailsFragment.setArguments(args);
                 // open fragment
+                MyInfoManager.getInstance().setSelectedImage(imageResId);
                 FragmentManager fm = ((Activity)context).getFragmentManager();
                 FragmentTransaction tr= fm.beginTransaction();
                 tr.replace(R.id.content, detailsFragment);
@@ -67,7 +73,7 @@ public class dataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return pictures.length;
+        return pictures.size();
     }
 
 }
@@ -84,8 +90,8 @@ class ViewHolder extends RecyclerView.ViewHolder {
         mImageView = (ImageView) itemView.findViewById(R.id.imageView);
     }
 
-    public void setData(int imageResId) {
-        mImageView.setImageResource(imageResId);
+    public void setData(Images imageResId) {
+        mImageView.setImageBitmap(imageResId.getImg());
 
     }
 }
