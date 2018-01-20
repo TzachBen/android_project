@@ -17,7 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.u31_7101.mytmblrapp.core.PostInfo;
+import com.example.tzach.onclicklistner.core.Albums;
+import com.example.tzach.onclicklistner.core.Images;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,16 +52,15 @@ public class NetworkConnector {
     public static final int INSERT_POST_REQ = 6;
 
 
-    private static final String TUMBLER_ID = "tumbler_id";
+    private static final String ALBUM_ID = "album_id";
     //private static final String TUMBLER_PASS = "tumbler_pass";
 
     private static final String RESOURCE_FAIL_TAG = "{\"result_code\":0}";
     private static final String RESOURCE_SUCCESS_TAG = "{\"result_code\":1}";
 
-    private static final String POST_ID = "post_id";
-    private static final String POST_TITLE = "post_title";
-    private static final String POST_CONTENT = "post_content";
-    private static final String POST_TAG = "post_tag";
+    private static final String POST_ID = "image_namw";
+    private static final String POST_TITLE = "image_album";
+    private static final String POST_CONTENT = "image_date";
 
 
     private static final String REQ = "req";
@@ -172,7 +173,7 @@ public class NetworkConnector {
     }
 
 
-    private void uploadPostInfo(final PostInfo item, final NetworkResListener listener) {
+    private void uploadPostInfo(final Images item, final NetworkResListener listener) {
 
         String reqUrl = HOST_URL + "upload_post?";
         notifyPreUpdateListener(listener);
@@ -218,11 +219,9 @@ public class NetworkConnector {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put(POST_ID, item.getId());
-                params.put(POST_TITLE, item.getTitle());
-                params.put(POST_CONTENT,  item.getContent());
-                params.put(POST_TAG, item.getTag());
-                params.put(TUMBLER_ID, item.getTumblerId());
+                params.put(POST_ID, item.getImgName());
+                params.put(POST_TITLE, item.getAlbumId());
+                params.put(POST_CONTENT,  item.getDate());
                 return params;
             }
 
@@ -233,7 +232,7 @@ public class NetworkConnector {
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-                byte[] pic = PostInfo.getImgAsByteArray(item.getImg());
+                byte[] pic = Images.getImgAsByteArray(item.getImg());
                 params.put("fileField", new DataPart(imagename + ".png", pic));
                 return params;
             }
@@ -247,7 +246,42 @@ public class NetworkConnector {
     }
 
 
-    public void sendRequestToServer(int requestCode, PostInfo data, NetworkResListener listener){
+
+    public void sendRequestToServer(int requestCode, Albums data, NetworkResListener listener){
+
+        if(data==null){
+            return;
+        }
+
+        Uri.Builder builder = new Uri.Builder();
+
+
+        switch (requestCode){
+            case INSERT_POST_REQ:{
+
+                //uploadPostInfo(data, listener);
+
+                break;
+            }
+
+            case DELETE_POST_REQ:{
+                builder.appendQueryParameter(REQ , String.valueOf(requestCode));
+                builder.appendQueryParameter(POST_ID , data.getId());
+
+                String query = builder.build().getEncodedQuery();
+                addToRequestQueue(query, listener);
+
+                break;
+            }
+
+            // updaetw album
+        }
+
+
+
+    }
+
+    public void sendRequestToServer(int requestCode, Images data, NetworkResListener listener){
 
         if(data==null){
             return;
@@ -266,7 +300,7 @@ public class NetworkConnector {
 
             case DELETE_POST_REQ:{
                 builder.appendQueryParameter(REQ , String.valueOf(requestCode));
-                builder.appendQueryParameter(POST_ID , data.getId());
+                builder.appendQueryParameter(POST_ID , data.getImgName());
 
                 String query = builder.build().getEncodedQuery();
                 addToRequestQueue(query, listener);
@@ -276,7 +310,7 @@ public class NetworkConnector {
 
             case GET_POST_IMAGE_REQ: {
                 builder.appendQueryParameter(REQ , String.valueOf(requestCode));
-                builder.appendQueryParameter(POST_ID , data.getId());
+                builder.appendQueryParameter(POST_ID , data.getImgName());
 
                 String query = builder.build().getEncodedQuery();
                 addImageRequestToQueue(query, listener);

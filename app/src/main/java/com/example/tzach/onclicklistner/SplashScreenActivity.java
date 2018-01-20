@@ -84,9 +84,9 @@ public class SplashScreenActivity extends AppCompatActivity implements  Activity
 
     private void collectDCIMpictures() {
         File dcimDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        File photosDir = new File(dcimDirectory,"Camera");
-        if(photosDir.exists()){
-            File photosList[] = photosDir.listFiles();
+       // File photosDir = new File(dcimDirectory,"Camera");
+        if(dcimDirectory.exists()){
+            File photosList[] = dcimDirectory.listFiles();
 
             if(photosList!=null && photosList.length>0){
                 for(File image:photosList){

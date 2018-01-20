@@ -74,7 +74,7 @@ public class MyInfoManager {
         return editAlbum;
     }
 
-    public void updatePost(Albums albums) {
+    public void updateAlbum(Albums albums) {
         if(albumDataBase !=null){
             albumDataBase.updateALBUM(albums);
         }
@@ -84,6 +84,24 @@ public class MyInfoManager {
         boolean res = false;
         if(albumDataBase !=null){
             res = albumDataBase.addNewImage(img);
+        }
+        return res;
+    }
+
+
+    public boolean updateImages(Images img){
+        boolean res = false;
+        if(albumDataBase !=null){
+            res = albumDataBase.updateImage(img);
+        }
+        return res;
+    }
+
+
+    public boolean updateImagesAlbum(String imgId, String albumId){
+        boolean res = false;
+        if(albumDataBase !=null){
+            res = albumDataBase.updateImagesAlbum(imgId,albumId);
         }
         return res;
     }

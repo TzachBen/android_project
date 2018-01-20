@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,17 +24,17 @@ public class Images {
     private String imgName;
     private String date;
     private String albumId;
-    private Bitmap img;
+   // private Bitmap img;
 
-    private String imgPath;
+   // private String imgPath;
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
-    }
+   // public void setImgPath(String imgPath) {
+   //     this.imgPath = imgPath;
+   // }
 
-    public String getImgPath() {
-        return imgPath;
-    }
+   // public String getImgPath() {
+  //      return imgPath;
+  //  }
 
     public Images(){
         super();
@@ -44,8 +46,8 @@ public class Images {
         this.imgName = generateId();
         this.albumId=albumId;
         this.date=date;
-        this.img = img;
-        this.imgPath = imgPath;
+       // this.img = img;
+       // this.imgPath = imgPath;
     }
 
 
@@ -82,22 +84,24 @@ public class Images {
 
     public Bitmap getImg() {
         Bitmap bitmap = null;
-        File dcimDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        File photosDir = new File(dcimDirectory,"Camera");
-        File img = new File(photosDir, getImgName());
-        if(img.exists()) {
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        try {
 
-            Bitmap mbitmap = BitmapFactory.decodeFile(img.getAbsolutePath(), bmOptions);
+            File dcimDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+            //  File photosDir = new File(dcimDirectory,"Camera");
+            File img = new File(dcimDirectory, getImgName());
+            if (img.exists()) {
+                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 
-            bitmap = Bitmap.createScaledBitmap(mbitmap, 300, 500, true);
+                Bitmap mbitmap = BitmapFactory.decodeFile(img.getAbsolutePath(), bmOptions);
+
+                bitmap = Bitmap.createScaledBitmap(mbitmap, 300, 500, true);
+            }
+        }catch(Throwable t){
+            t.printStackTrace();
         }
         return bitmap;
     }
 
-    public void setImg(Bitmap img) {
-        this.img = img;
-    }
 
     public static byte[] getImgAsByteArray(Bitmap bm){
         byte[] res= new byte[0];
@@ -111,7 +115,19 @@ public class Images {
 
     public void setImg(byte[] imgeArray){
         if(imgeArray!=null){
-            this.img = BitmapFactory.decodeByteArray(imgeArray, 0, imgeArray.length);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(imgeArray, 0, imgeArray.length);
+
+            File dcimDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+            File photosDir = new File(dcimDirectory,"Camera");
+            File img = new File(photosDir, getImgName());
+
+                try{
+                    OutputStream  os = new FileOutputStream(img);
+                    bitmap.compress(Bitmap.CompressFormat.PNG,90,os);
+                }
+                catch(Throwable t){
+                    t.printStackTrace();
+                }
         }
     }
 
@@ -131,7 +147,7 @@ public class Images {
                     img.setImgName(iObj.getString("imgName"));
                     img.setAlbumId(iObj.getString("albumId"));
                     img.setDate(iObj.getString("date"));
-                    img.setImgPath(iObj.getString("img_path"));
+                    //img.setImgPath(iObj.getString("img_path"));
                   //  img.setImg(iObj.("img"));
 
 

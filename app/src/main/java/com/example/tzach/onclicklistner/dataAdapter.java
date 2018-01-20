@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -91,7 +92,10 @@ class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setData(Images imageResId) {
-        mImageView.setImageBitmap(imageResId.getImg());
+        Bitmap bm = imageResId.getImg();
+        if(bm!=null) {
+            mImageView.setImageBitmap(bm);
+        }
 
     }
 }

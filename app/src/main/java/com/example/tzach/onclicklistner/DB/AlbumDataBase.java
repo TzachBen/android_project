@@ -138,6 +138,23 @@ public class AlbumDataBase extends SQLiteOpenHelper {
     }
 
 
+    public boolean updateImagesAlbum(String imgId, String albumId) {
+        long result = -1;
+        try {
+            ContentValues values = new ContentValues();
+            values.put(IMAGES_NAME, imgId);
+            values.put(RELATED_ALBUM_ID, albumId);
+            String[] whereArg = {imgId};
+            result = db.update(IMAGES_TABLE, values, IMAGES_NAME + "=?", whereArg);
+            if (result > 0) {
+                return true;
+            }
+        }catch (Throwable t){
+            t.printStackTrace();
+        }
+        return false;
+    }
+
 //IMAGE FUNCTIONS
 public boolean updateImage(Images images) {
 
@@ -204,4 +221,6 @@ public boolean updateImage(Images images) {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+
 }
