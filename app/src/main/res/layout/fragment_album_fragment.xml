@@ -6,6 +6,19 @@
     android:id="@+id/albumContainer"
     tools:context="com.example.tzach.onclicklistner.album_fragment">
 
+    <FrameLayout
+        android:id="@+id/albums_list_fram"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        >
+
+        <ListView
+            android:id="@+id/albums_list"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/creat_album_btn"

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.tzach.onclicklistner.core.MyInfoManager;
+import com.example.tzach.onclicklistner.utils.NetworkConnector;
 
 //import com.example.tzach.onclicklistner.core.MyInfoManager;
 
@@ -54,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //MyInfoManager.getInstance().openDatabase(this);
+        FragmentManager fm= getFragmentManager();
+        FragmentTransaction ft =fm.beginTransaction();
+        ImageFragment imf = new ImageFragment();
+        ft.replace(R.id.content,imf);
+        ft.commit();
+        MyInfoManager.getInstance().openDatabase(this);
+        NetworkConnector.getInstance().initialize(this);
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
